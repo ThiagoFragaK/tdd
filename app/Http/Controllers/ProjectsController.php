@@ -8,59 +8,31 @@ use App\Http\Requests\UpdateProjectsRequest;
 
 class ProjectsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return response()->json([
+			'data' => Projects::get()
+		], 201);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreProjectsRequest $request)
     {
-        //
+        return response()->json([
+			'data' => Projects::create($request->only(["name", "type"]))
+		], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Projects $projects)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Projects $projects)
     {
-        //
+        return response()->json([
+            'data' => Projects::create($projects->only(["name", "type"]))
+        ], 201);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateProjectsRequest $request, Projects $projects)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Projects $projects)
     {
-        //
+        return response()->json([
+            'data' => $projects->delete()
+        ], 204);
     }
 }
